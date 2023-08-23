@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vivek's Text To Speech Application", "Vivek's Text To Speech Application.csproj", "{D5D08199-C776-4DFC-B275-3FEBD312563E}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Vivek's Text To Speech App", "..\Vivek's Text To Speech App\Vivek's Text To Speech App.vdproj", "{E386CC72-F3D6-488F-9DC2-9195210AB20C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{D5D08199-C776-4DFC-B275-3FEBD312563E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5D08199-C776-4DFC-B275-3FEBD312563E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5D08199-C776-4DFC-B275-3FEBD312563E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E386CC72-F3D6-488F-9DC2-9195210AB20C}.Debug|Any CPU.ActiveCfg = Debug
+		{E386CC72-F3D6-488F-9DC2-9195210AB20C}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
