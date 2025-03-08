@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Speech.Synthesis;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Vivek_s_Text_To_Speech_Application
 {
@@ -19,7 +20,19 @@ namespace Vivek_s_Text_To_Speech_Application
             this.MaximizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
+            LogInstalledVoices(); // Log the installed voices
         }
+
+        private void LogInstalledVoices()
+        {
+            string voices = "Installed voices:\n";
+            foreach (var voice in synthesizer.GetInstalledVoices())
+            {
+                voices += $"Voice Name: {voice.VoiceInfo.Name}, Culture: {voice.VoiceInfo.Culture}\n";
+            }
+            MessageBox.Show(voices, "Installed Voices", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
 
         private void btnSpeak_Click(object sender, EventArgs e)
         {
@@ -73,17 +86,20 @@ namespace Vivek_s_Text_To_Speech_Application
                 string textToSpeak = richTextboxSpeak.Text;
                 if (!string.IsNullOrEmpty(textToSpeak))
                 {
-                    ProcessStartInfo startInfo = new ProcessStartInfo
-                    {
-                        FileName = "espeak",
-                        Arguments = $"-v hi \"{textToSpeak}\"",
-                        UseShellExecute = false,
-                        RedirectStandardOutput = true,
-                        CreateNoWindow = true
-                    };
+                    // Check if the "Microsoft Kalpana" voice is installed
+                    var kalpanaVoice = synthesizer.GetInstalledVoices()
+                                                  .FirstOrDefault(v => v.VoiceInfo.Name == "Microsoft Kalpana");
 
-                    Process process = new Process { StartInfo = startInfo };
-                    process.Start();
+                    if (kalpanaVoice != null)
+                    {
+                        synthesizer.SelectVoice("Microsoft Kalpana");
+                        synthesizer.SpeakAsyncCancelAll(); // Cancel any ongoing speech
+                        synthesizer.SpeakAsync(textToSpeak); // Speak the new text
+                    }
+                    else
+                    {
+                        MessageBox.Show("Microsoft Kalpana voice is not installed.", "Voice Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
             }
             catch (Exception ex)
